@@ -169,7 +169,11 @@ extension AtomFeed {
         .feedEntryMediaGroupMediaCategory,
         .feedEntryMediaGroupMediaCredit,
         .feedEntryMediaGroupMediaRating,
-        .feedEntryMediaGroupMediaContent:
+        .feedEntryMediaGroupMediaContent,
+            .feedEntryMediaGroupDescription,
+            .feedEntryMediaGroupTitle,
+            .feedEntryMediaGroupThumbnail
+            :
             
             if  self.entries?.last?.media == nil {
                 self.entries?.last?.media = MediaNamespace()
@@ -341,6 +345,25 @@ extension AtomFeed {
                 
                 self.entries?.last?.media?.mediaGroup?.mediaContents?.append(MediaContent(attributes: attributes))
             
+                case .feedEntryMediaGroupTitle:
+                    
+                    if  self.entries?.last?.media?.mediaGroup?.mediaTitle == nil {
+                        self.entries?.last?.media?.mediaGroup?.mediaTitle = attributes.first?.value
+                    }
+                    
+                case .feedEntryMediaGroupDescription:
+                    if  self.entries?.last?.media?.mediaGroup?.mediaDescription == nil {
+                        self.entries?.last?.media?.mediaGroup?.mediaDescription = MediaDescription(attributes: attributes)
+                    }
+                    
+                case .feedEntryMediaGroupThumbnail:
+                    
+                    if  self.entries?.last?.media?.mediaGroup?.mediaThumbnails == nil {
+                        self.entries?.last?.media?.mediaGroup?.mediaThumbnails = []
+                    }
+                    
+                    self.entries?.last?.media?.mediaGroup?.mediaThumbnails?.append(MediaThumbnail(attributes: attributes))
+
             default: break
                 
             }

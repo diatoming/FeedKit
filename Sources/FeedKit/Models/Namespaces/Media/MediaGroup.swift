@@ -55,6 +55,10 @@ public class MediaGroup {
     /// optional attribute.
     public var mediaRating: MediaRating?
     
+    public var mediaTitle: String?
+    public var mediaDescription: MediaDescription?
+    public var mediaThumbnails: [MediaThumbnail]?
+
     public init() { }
 
 }
@@ -68,7 +72,11 @@ extension MediaGroup: Equatable {
             lhs.mediaContents == rhs.mediaContents &&
             lhs.mediaCredits == rhs.mediaCredits &&
             lhs.mediaCategory == rhs.mediaCategory &&
-            lhs.mediaRating == rhs.mediaRating
+            lhs.mediaRating == rhs.mediaRating &&
+        lhs.mediaThumbnails == rhs.mediaThumbnails &&
+        lhs.mediaTitle == rhs.mediaTitle &&
+        lhs.mediaDescription == rhs.mediaDescription
+
     }
     
 }
